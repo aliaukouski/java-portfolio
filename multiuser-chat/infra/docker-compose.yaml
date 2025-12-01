@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:18
+    container_name: postgres-chat-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: chat_user
+      POSTGRES_PASSWORD: chat_password
+      POSTGRES_DB: chat_db
+    ports:
+      - "30432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U chat_user -d chat_db" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
