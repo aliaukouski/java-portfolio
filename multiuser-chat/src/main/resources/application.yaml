@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: multiuser-chat
+
+  datasource:
+    url: jdbc:postgresql://localhost:30432/chat_db
+    username: chat_user
+    password: chat_password
+    driver-class-name: org.postgresql.Driver
